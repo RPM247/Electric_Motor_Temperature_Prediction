@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Electric Motor Temperature Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .container {
+            width: 400px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        p.description {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #000;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+
+        .prediction {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">Electric Motor Temperature</div>
+
+    <div class="container">
+        <h2>Electric Motor Temperature Prediction</h2>
+        <p class="description">Fill in the fields below to predict Permanent Magnet surface temperature.</p>
+
+        <form action="/y_predict" method="POST">
+            <input type="number" name="ambient" step="any" placeholder="Ambient temperature" required>
+            <input type="number" name="coolant" step="any" placeholder="Coolant temperature" required>
+            <input type="number" name="u_d" step="any" placeholder="Voltage d-component" required>
+            <input type="number" name="u_q" step="any" placeholder="Voltage q-component" required>
+            <input type="number" name="motor_speed" step="any" placeholder="Motor speed" required>
+            <input type="number" name="i_d" step="any" placeholder="Current d-component" required>
+            <input type="number" name="i_q" step="any" placeholder="Current q-component" required>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="prediction">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
